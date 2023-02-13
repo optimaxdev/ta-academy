@@ -1,3 +1,17 @@
 {
-  "eslint.workingDirectories": ["lesson_6/practice", "lesson_2/practice"]
+  "eslint.workingDirectories": [
+    "lesson_6/practice",
+    "lesson_2/practice",
+    "lesson_3/homework"
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
