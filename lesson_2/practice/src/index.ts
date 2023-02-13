@@ -1,1 +1,1 @@
-const example = 'Im sorry :(';
+const example = 'Hello there';
