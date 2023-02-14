@@ -1,12 +1,8 @@
-/*
-    Remove all `any` type
-*/
-
 type Animal = {
-  moving: any;
+  moving: string;
   voice?: string;
-  info: any;
-  say: () => string | any;
+  info: () => string;
+  say: () => string | void;
 };
 
 class Cat implements Animal {
@@ -39,6 +35,7 @@ class Fish implements Animal {
   moving = 'water';
 
   info(): string {
+    console.log(typeof this.moving);
     return `This animal: moving in the ${this.moving}.`;
   }
   say(): void {
