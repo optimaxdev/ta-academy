@@ -6,7 +6,10 @@
   "scripts": {
     "start": "yarn ts-node src/index.ts",
     "tslint": "tsc --noEmit",
-    "eslint": "eslint ./"
+    "eslint": "eslint ./",
+    "test": "playwright test --headed project=chromium",
+    "report": "playwright show-report",
+    "debug": "yarn test --debug"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.37.0",
