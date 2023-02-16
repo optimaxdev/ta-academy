@@ -1,12 +1,12 @@
 # Lesson 3 - Create pull request
 
-- Checkout to new branch
+- Checkout to new branch - done
 
 ```sh
-git checkout -B my_new_branch
+git checkout -B my_new_branch - worked
 ```
 
-- Make some changes
+- Make some changes - making ^_^
 - Commit changed files
 
 ```sh
