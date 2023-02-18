@@ -3,8 +3,7 @@ import { DataLayer } from '@Utils/dataLayer';
 
 test.use({ viewport: { height: 1080, width: 1920 } });
 
-test.describe
-  .only('test add and remove "Super Hydrophobic coating" of Datalayer', () => {
+test.describe('test add and remove "Super Hydrophobic coating" of Datalayer', () => {
   test('add and remove coating in form and PopUp', async ({
     page,
   }) => {
