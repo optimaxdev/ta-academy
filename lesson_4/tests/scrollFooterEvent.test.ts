@@ -3,9 +3,7 @@ import { DataLayer } from '@Utils/dataLayer';
 
 test.use({ viewport: { height: 1080, width: 1920 } });
 
-test('check event in dataLayer 20% visibility', async ({
-  page,
-}) => {
+test('check event in dataLayer 20% visibility', async ({ page }) => {
   const dataLayer = new DataLayer(page);
 
   const expectedEvent = {
