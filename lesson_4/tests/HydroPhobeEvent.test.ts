@@ -5,11 +5,13 @@ test.use({ viewport: { height: 1080, width: 1920 } });
 
 test.describe
   .only('test add and remove "Super Hydrophobic coating" of Datalayer', () => {
-  test('add and remove coating', async ({ page }) => {
+  test('add and remove coating in form and PopUp', async ({
+    page,
+  }) => {
     await page.goto('/');
     const dataLayer = new DataLayer(page);
 
-    await test.step('test add costing', async () => {
+    await test.step('test add coating', async () => {
       const buttonSunGlass = page.locator(
         '//nav[contains(@class,"menu__wrap")]//a[@href="/sunglasses"]'
       );
@@ -24,13 +26,12 @@ test.describe
         '//button[@aria-label="choose lenses"]'
       );
       await buttonSelectLenses.waitFor();
-
       await buttonSelectLenses.click();
 
       const buttonNonPrescription = page.locator(
         '//h3[contains(text(),"Non-prescription")]'
       );
-      buttonNonPrescription.waitFor();
+      await buttonNonPrescription.waitFor();
       await buttonNonPrescription.click();
 
       const buttonRecomendedPrescription = page.locator(
@@ -44,10 +45,10 @@ test.describe
       await buttonContinue.click();
       await buttonContinue.click();
 
-      const checkButtonSuperHydroPhobe = page.locator(
+      const checkBoxHydroPhobe = page.locator(
         '//input[@value="Super Hydrophobic"]'
       );
-      await checkButtonSuperHydroPhobe.click();
+      await checkBoxHydroPhobe.click();
       await buttonContinue.click();
 
       const expectedEvent = {
@@ -72,10 +73,10 @@ test.describe
       );
       await buttonBack.click();
 
-      const checkButtonSuperHydroPhobe = page.locator(
+      const checkBoxHydroPhobe = page.locator(
         '//input[@value="Super Hydrophobic"]'
       );
-      await checkButtonSuperHydroPhobe.click();
+      await checkBoxHydroPhobe.click();
 
       const buttonContinue = page.locator(
         '//span[contains(text(),"Continue")]'
