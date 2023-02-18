@@ -19,19 +19,18 @@ test.describe
         '//*[@id="category-items-grid"]/li[1]/div[1]'
       );
       await firstGlassInList.click();
-      await page.waitForTimeout(1000);
 
       const buttonSelectLenses = page.locator(
         '//button[@aria-label="choose lenses"]'
       );
       await buttonSelectLenses.waitFor();
-      await page.waitForTimeout(1000);
 
       await buttonSelectLenses.click();
 
       const buttonNonPrescription = page.locator(
         '//h3[contains(text(),"Non-prescription")]'
       );
+      buttonNonPrescription.waitFor();
       await buttonNonPrescription.click();
 
       const buttonRecomendedPrescription = page.locator(
