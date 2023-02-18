@@ -3,14 +3,15 @@ import { DataLayer } from '@Utils/dataLayer';
 
 test.use({ viewport: { height: 1080, width: 1920 } });
 
-test.describe.only('????????????????????????', () => {
-  test('????????????????????????/', async ({ page }) => {
+test.describe
+  .only('test add and remove "Super Hydrophobic coating" of Datalayer', () => {
+  test('add and remove coating', async ({ page }) => {
     await page.goto('/');
     const dataLayer = new DataLayer(page);
 
-    await test.step('check Magazines event "visible" of dataLayer', async () => {
+    await test.step('test add costing', async () => {
       const buttonSunGlass = page.locator(
-        '//nav[@class="menu__wrap___2cbrI"]//a[@href="/sunglasses"]'
+        '//nav[contains(@class,"menu__wrap")]//a[@href="/sunglasses"]'
       );
       await buttonSunGlass.click();
 
@@ -18,11 +19,14 @@ test.describe.only('????????????????????????', () => {
         '//*[@id="category-items-grid"]/li[1]/div[1]'
       );
       await firstGlassInList.click();
+      await page.waitForTimeout(1000);
 
       const buttonSelectLenses = page.locator(
         '//button[@aria-label="choose lenses"]'
       );
       await buttonSelectLenses.waitFor();
+      await page.waitForTimeout(1000);
+
       await buttonSelectLenses.click();
 
       const buttonNonPrescription = page.locator(
@@ -63,9 +67,7 @@ test.describe.only('????????????????????????', () => {
       expect(event).toStrictEqual(expectedEvent);
     });
 
-    //тестим назад убираем галку
-
-    await test.step('Remove Hydrophobic', async () => {
+    await test.step('remove coating', async () => {
       const buttonBack = page.locator(
         '//button[text()="Back"]'
       );
@@ -97,8 +99,7 @@ test.describe.only('????????????????????????', () => {
       expect(event).toStrictEqual(expectedEvent);
     });
 
-    // Жмём назад и вперед
-    await test.step('????????????????????????', async () => {
+    await test.step('Test empty checkbox "add coating"', async () => {
       const buttonBack = page.locator(
         '//button[text()="Back"]'
       );
@@ -125,8 +126,7 @@ test.describe.only('????????????????????????', () => {
       expect(event).toStrictEqual(expectedEvent);
     });
 
-    /////////////////// popUP
-    await test.step('??????????????????????????????', async () => {
+    await test.step('test popUp add coating', async () => {
       const buttonBack = page.locator(
         '//button[text()="Back"]'
       );
@@ -147,17 +147,66 @@ test.describe.only('????????????????????????', () => {
       await buttonAddHydroPhobicCoating.click();
 
       expect(popUp).toBeVisible({ visible: false });
+
+      const buttonContinue = page.locator(
+        '//span[contains(text(),"Continue")]'
+      );
+      await buttonContinue.click();
+
       const expectedEvent = {
         event: 'PDPInteraction',
         eventAction: 'Sun Lens Funnel - Step 4: Coating',
         eventCategory: 'PDP - D',
-        eventLabel: 'Learn More - Super Hydrophobic',
+        eventLabel: 'Super Hydrophobic - Add - PopUp',
       };
 
       const [event] = await dataLayer.waitForDataLayer({
         event: 'PDPInteraction',
         eventAction: 'Sun Lens Funnel - Step 4: Coating',
-        eventLabel: 'Learn More - Super Hydrophobic',
+        eventLabel: 'Super Hydrophobic - Add - PopUp',
+      });
+
+      expect(event).toStrictEqual(expectedEvent);
+    });
+
+    await test.step('test popUp remove coating', async () => {
+      const buttonBack = page.locator(
+        '//button[text()="Back"]'
+      );
+      await buttonBack.click();
+
+      const buttonPopUp = page.locator(
+        '//div[@role="presentation"]//span[@aria-label="Help"]'
+      );
+      await buttonPopUp.click();
+
+      const popUp = page.locator(
+        '//div[contains(@class,"coatingPopup__container") and .//h3[text()="Super Hydrophobic Coating"]]'
+      );
+
+      const buttonAddedHydroPhobicCoating = page.locator(
+        '//button[contains(@class,"coatingPopup__button")]'
+      );
+      await buttonAddedHydroPhobicCoating.click();
+
+      expect(popUp).toBeVisible({ visible: false });
+
+      const buttonContinue = page.locator(
+        '//span[contains(text(),"Continue")]'
+      );
+      await buttonContinue.click();
+
+      const expectedEvent = {
+        event: 'PDPInteraction',
+        eventAction: 'Sun Lens Funnel - Step 4: Coating',
+        eventCategory: 'PDP - D',
+        eventLabel: 'Super Hydrophobic - Remove - PopUp',
+      };
+
+      const [event] = await dataLayer.waitForDataLayer({
+        event: 'PDPInteraction',
+        eventAction: 'Sun Lens Funnel - Step 4: Coating',
+        eventLabel: 'Super Hydrophobic - Remove - PopUp',
       });
 
       expect(event).toStrictEqual(expectedEvent);
