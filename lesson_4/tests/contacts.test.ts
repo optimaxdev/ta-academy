@@ -21,6 +21,7 @@ test.describe('check amount of product on page', () => {
     const products = await page.$$(
       '[data-test-name="product"]'
     );
+
     const qty = products.length;
     expect(qty).toBe(36);
   });

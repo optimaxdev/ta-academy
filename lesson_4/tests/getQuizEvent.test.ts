@@ -167,4 +167,4 @@ test.describe('check event in dataLayer in the quiz', () => {
         });
         expect(event).toStrictEqual(expectedEvent);
     });
-})
+});
