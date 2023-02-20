@@ -17,8 +17,10 @@ test.describe('Test "As featured in" block', () => {
         eventCategory: 'HP - D',
         eventLabel: 'Visible',
       };
-
-      await page.mouse.wheel(0, 4300);
+      const listLocatorsOfMagazines = page.locator(
+        '//ul[contains(@class,"homeAsFeaturedIn__list")]/li'
+      );
+      listLocatorsOfMagazines.scrollIntoViewIfNeeded();
 
       const [event] = await dataLayer.waitForDataLayer({
         event: 'HPInteraction',
