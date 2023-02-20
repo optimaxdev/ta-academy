@@ -1,9 +1,7 @@
-/*
- - Remove all `any` type
- - Fix type `person`
-*/
-
 type Person = {
+  name: string;
+  age: number | string;
+  isSuperHero?: boolean;
   occupation?: string;
 };
 

@@ -16,11 +16,12 @@ test.describe('check amount of product on page', () => {
     const url = page.url();
     expect(url).toBe(`${baseURL}contact-lenses`);
 
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(20000);
 
     const products = await page.$$(
       '[data-test-name="product"]'
     );
+
     const qty = products.length;
     expect(qty).toBe(36);
   });
