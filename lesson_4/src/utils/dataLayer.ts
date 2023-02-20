@@ -3,6 +3,7 @@ import { waitFor } from '@Utils/waitFor';
 import type { DataLayerEvent } from '@Utils/types/dataLayerEvent';
 import deepMatch from 'deep-match2';
 import type { Page } from 'playwright-core';
+import { expect } from '@playwright/test';
 
 export class DataLayer {
   public constructor(private page: Page) {}
@@ -39,6 +40,21 @@ export class DataLayer {
       () => this.findInDataLayer(event),
       options
     ).catch((e) => this.throwNoEventFoundError(e, event));
+  }
+
+  public createEventVerifier(
+    baseEvent: DataLayerEvent
+  ): (eventLabel: string) => Promise<void> {
+    return async (eventLabel: string) => {
+      const [event] = await this.waitForDataLayer({
+        ...baseEvent,
+        eventLabel,
+      });
+      expect(event).toStrictEqual({
+        ...baseEvent,
+        eventLabel,
+      });
+    };
   }
 
   private throwNoEventFoundError = (
