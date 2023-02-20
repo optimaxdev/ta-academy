@@ -1,33 +1,32 @@
-import { expect, test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
+import { expect, test } from '@playwright/test';
 
-test.use({ viewport: { height: 1080, width: 1920 } });
-
-test.describe('название блока', () => {
+test.describe('testing the block - As featured in', () => {
+  test.use({ viewport: { height: 1080, width: 1920 } });
     test.beforeEach(async ({ page }) => {
-      await page.goto('/');
-      await page.waitForTimeout(5000);
+      await page.goto('./');
+      await page.waitForTimeout(25000);
+    });
       
-      test('прокрутка до блока вниз', async ({
-        page,
-      }) => {
+      test('scroll to the block(As featured in), check event in dataLayer(Magazines-Visible)', async ({page}) => {
         const dataLayer = new DataLayer(page);
-      
         const expectedEvent = {
             event: "HPInteraction",
             eventAction: "Magazines",
             eventCategory: "HP - D",
             eventLabel: "Visible",    
         };
-      
-       
-        await page.mouse.wheel(0, 4200);
+        await page.mouse.wheel(0, 4600);
         const [event] = await dataLayer.waitForDataLayer({
           event: 'HPInteraction',
           eventAction: 'Magazines',
         });
         expect(event).toStrictEqual(expectedEvent);
       });
+
+
+
+    
       
-    });
+    
 });
