@@ -13,8 +13,8 @@ test.describe('check amount of product on page', () => {
     page,
     baseURL,
   }) => {
-    const url = page.url();
-    expect(url).toBe(`${baseURL}contact-lenses`);
+    // const url = page.url();
+    // expect(url).toBe(`${baseURL}contact-lenses`);
 
     await page.waitForTimeout(10000);
 

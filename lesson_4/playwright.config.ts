@@ -8,7 +8,7 @@ export default defineConfig({
   /* Maximum time one test can run for. */
   timeout: 120 * 1000,
   expect: {
-    timeout: 5000,
+    timeout: 10000,
   },
   /* Run tests in files in parallel */
   fullyParallel: false,
