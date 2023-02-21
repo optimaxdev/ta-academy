@@ -6,6 +6,6 @@ export class SunglassesCard extends Component {
     };
 
     public async getProduct(): Promise<void> {
-        await this.LOCATOR.product.click();
+        return this.LOCATOR.product.click();
     }
 }

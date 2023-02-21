@@ -6,6 +6,6 @@ export class GlassesSidebar extends Component {
     };
 
     public async selectLenses(): Promise<void> {
-        await this.LOCATOR.button.click();
+        return this.LOCATOR.button.click();
     }
 }
