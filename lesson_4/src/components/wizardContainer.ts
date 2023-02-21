@@ -9,18 +9,18 @@ export class WizardContainer extends Component {
     };
 
     public async selectOption(): Promise<void> {
-        return this.LOCATORS.nonPrescription.click();
+        await this.LOCATORS.nonPrescription.click();
     }
 
     public async continueButton(): Promise<void> {
-        return this.LOCATORS.continueButton.click();
+        await this.LOCATORS.continueButton.click();
     }
 
     public async backToPrev(): Promise<void> {
-        return this.LOCATORS.backToPrev.click();
+        await this.LOCATORS.backToPrev.click();
     }
 
     public async hydrophobicButton(): Promise<void> {
-        return this.LOCATORS.hydrophobicButton.click();
+        await this.LOCATORS.hydrophobicButton.click();
     }
 }
