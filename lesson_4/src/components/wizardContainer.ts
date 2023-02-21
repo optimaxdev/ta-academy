@@ -6,6 +6,7 @@ export class WizardContainer extends Component {
         continueButton: this.locator.locator('//button[contains(., "Continue")]'),
         backToPrev: this.locator.locator('//button[text() = "Back"]'),
         hydrophobicButton: this.locator.locator('input[value="Super Hydrophobic"]'),
+        openPopUp: this.locator.locator('//div[@role="presentation"]//button[@type="button"]'),
     };
 
     public async selectOption(): Promise<void> {
@@ -22,5 +23,9 @@ export class WizardContainer extends Component {
 
     public async hydrophobicButton(): Promise<void> {
         await this.LOCATORS.hydrophobicButton.click();
+    }
+
+    public async openPopUp(): Promise<void> {
+        await this.LOCATORS.openPopUp.click();
     }
 }

@@ -34,4 +34,23 @@ test.describe('PDPInteraction events', () => {
         await sunglassesPage.WizardContainer.continueButton();
         await verifyEvent('Super Hydrophobic - Remove');
     });
+
+    test('should fire after adding coating and removing it via popUp', async ({
+        dataLayer,
+        sunglassesPage,
+    }) => {
+        const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
+        await sunglassesPage.WizardContainer.openPopUp();
+        await verifyEvent('Learn More - Super Hydrophobic');
+
+        await sunglassesPage.CoatingPopUp.popUpButton();
+        await sunglassesPage.WizardContainer.continueButton();
+        await verifyEvent('Super Hydrophobic - Add - PopUp');
+
+        await sunglassesPage.WizardContainer.backToPrev();
+        await sunglassesPage.WizardContainer.openPopUp();
+        await sunglassesPage.CoatingPopUp.popUpButton();
+        await sunglassesPage.WizardContainer.continueButton();
+        await verifyEvent('Super Hydrophobic - Remove - PopUp');
+    });
 });
