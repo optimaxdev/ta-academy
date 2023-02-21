@@ -13,7 +13,8 @@
             "@Utils/*": ["src/utils/*"],
             "@Core/*": ["src/core/*"],
             "@Test": ["src/customTest"],
-            "Components/*": ["src/components/*"]
+            "@Components/*": ["src/components/*"],
+            "@Pages/*": ["src/pages/*"]
         },
         "strict": true
     },
