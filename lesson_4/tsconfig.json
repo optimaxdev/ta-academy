@@ -10,7 +10,10 @@
         "moduleResolution": "node",
         "baseUrl": "./",
         "paths": {
-            "@Utils/*": ["src/utils/*"]
+            "@Utils/*": ["src/utils/*"],
+            "@Core/*": ["src/core/*"],
+            "@Test": ["src/customTest"],
+            "Components/*": ["src/components/*"]
         },
         "strict": true
     },
