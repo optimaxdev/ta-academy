@@ -64,4 +64,5 @@ module.exports = {
         ],
     },
     root: true,
+    project: "lesson_4/tsconfig.json"
 };

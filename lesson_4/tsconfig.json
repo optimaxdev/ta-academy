@@ -19,5 +19,6 @@
         "strict": true
     },
     "include": ["src", "tests", ".eslintrc.js", "playwright.config.ts", "typescript"],
+    "allowJs": true,
     "exclude": ["node_modules"]
 }
