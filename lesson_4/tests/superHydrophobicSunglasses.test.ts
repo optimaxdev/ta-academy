@@ -1,7 +1,7 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@Test';
 import { DataLayer } from '@Utils/dataLayer';
 
-test.describe('PDPInteraction events', () => {
+test.describe.only('PDPInteraction events', () => {
     let dataLayer: DataLayer;
     const expectedEvent = {
         event: 'PDPInteraction',
@@ -9,60 +9,33 @@ test.describe('PDPInteraction events', () => {
         eventCategory: 'PDP - D',
     };
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, homePage, productPage, categoryPage }) => {
         dataLayer = new DataLayer(page);
 
-        await page.goto('/');
-
-        const sunglassesButton = await page.waitForSelector('//nav//a[contains(., "Sunglasses")]');
-        await Promise.all([sunglassesButton.click(), page.waitForLoadState('domcontentloaded')]);
-
-        const product = await page.waitForSelector('[data-test-name="product"]');
-        await Promise.all([product.click(), page.waitForLoadState('domcontentloaded')]);
-
-        await page.waitForTimeout(5000);
-        const chooseLenses = await page.waitForSelector('//button[@aria-label="choose lenses"]');
-        await chooseLenses.click();
-
-        const nonPrescription = await page.waitForSelector(
-            '//div[@role="button" and contains(., "Non-prescription")]'
-        );
-        await nonPrescription.click();
-
-        let continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
-
-        await page.waitForTimeout(2000);
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await homePage.open(); //Открываем хомепэйж
+        await homePage.Header.buttonSunglassesClick(); //кликаем на кнопку санглас
+        await categoryPage.firstProductClick(); // выбираем первое очко
+        await productPage.buttonSelecetLensesClick(); // клик выбрать линзу
+        await productPage.Wizard.buttonNonPrescriptionClick();
+        await productPage.Wizard.buttonContinueClick();
+        await productPage.Wizard.buttonContinueClick();
     });
-    test('should fire after adding coating and removing it', async ({ page }) => {
+    test('should fire after adding coating and removing it', async ({ page, productPage }) => {
         const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
 
-        let continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await productPage.Wizard.buttonContinueClick();
 
         await verifyEvent('No Coating Added');
 
-        let backToPrev = await page.waitForSelector('//button[text() = "Back"]');
-        await backToPrev.click();
-
-        let hydrophobicButton = await page.waitForSelector('input[value="Super Hydrophobic"]');
-        await hydrophobicButton.click();
-
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await productPage.Wizard.backToPrevClick();
+        await productPage.Wizard.buttonHydrophobicClick();
+        await productPage.Wizard.buttonContinueClick();
 
         await verifyEvent('Super Hydrophobic - Add');
 
-        backToPrev = await page.waitForSelector('//button[text() = "Back"]');
-        await backToPrev.click();
-
-        hydrophobicButton = await page.waitForSelector('input[value="Super Hydrophobic"]');
-        await hydrophobicButton.click();
-
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await productPage.Wizard.backToPrevClick();
+        await productPage.Wizard.buttonHydrophobicClick();
+        await productPage.Wizard.buttonContinueClick();
 
         await verifyEvent('Super Hydrophobic - Remove');
     });
