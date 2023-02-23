@@ -8,7 +8,7 @@ test.describe.only('PDPInteraction events', () => {
         eventCategory: 'PDP - D',
     };
 
-    test.beforeEach(async ({ page, homePage, productPage, categoryPage }) => {
+    test.beforeEach(async ({ homePage, productPage, categoryPage }) => {
         await homePage.open();
         await homePage.Header.buttonSunglassesClick();
         await categoryPage.firstProductClick();
@@ -21,7 +21,6 @@ test.describe.only('PDPInteraction events', () => {
         const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
 
         await productPage.Wizard.buttonContinueClick();
-
         await verifyEvent('No Coating Added');
 
         await productPage.Wizard.backToPrevClick();
@@ -35,5 +34,21 @@ test.describe.only('PDPInteraction events', () => {
         await productPage.Wizard.buttonContinueClick();
 
         await verifyEvent('Super Hydrophobic - Remove');
+    });
+
+    test('test PopUp: visible, add and remove', async ({ dataLayer, productPage }) => {
+        const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
+        await productPage.PopUpCoating.buttonPopUpOpenClick();
+        await verifyEvent('Learn More - Super Hydrophobic');
+
+        await productPage.PopUpCoating.addHydroPhobicCoatingClick();
+        await productPage.Wizard.buttonContinueClick();
+        await verifyEvent('Super Hydrophobic - Add - PopUp');
+
+        await productPage.Wizard.backToPrevClick();
+        await productPage.PopUpCoating.buttonPopUpOpenClick();
+        await productPage.PopUpCoating.addedHydroPhobicCoatingClick();
+        await productPage.Wizard.buttonContinueClick();
+        await verifyEvent('Super Hydrophobic - Remove - PopUp');
     });
 });

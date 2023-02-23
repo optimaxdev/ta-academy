@@ -1,5 +1,4 @@
 import { Container } from '@Core/container';
-import type { Locator } from '@playwright/test';
 
 export class CategoryPage extends Container {
     protected LOCATORS = {
@@ -15,7 +14,7 @@ export class CategoryPage extends Container {
     public async firstProductClick() {
         let arrayProducts = await this.LOCATORS.products.all();
         await Promise.all([
-            await arrayProducts[0].click(),
+            arrayProducts[0].click(),
             this.page.waitForLoadState('domcontentloaded'),
         ]);
     }

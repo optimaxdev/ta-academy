@@ -20,7 +20,7 @@ export class Wizard extends Component {
     }
 
     public async backToPrevClick() {
-        await this.LOCATORS.buttonContinue.click();
+        await this.LOCATORS.backToPrev.click();
     }
 
     public async buttonHydrophobicClick() {
