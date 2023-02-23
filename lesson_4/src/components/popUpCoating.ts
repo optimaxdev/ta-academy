@@ -7,23 +7,21 @@ export class PopUpCoating extends Component {
 
     protected LOCATORS = {
         buttonPopUpOpen: this.page.locator('//div[@role="presentation"]//span[@aria-label="Help"]'),
-        addHydroPhobicCoating: this.page.locator(
+        buttonAddHydroPhobicCoating: this.page.locator(
             '//button[contains(@class,"coatingPopup__button") and ./span[text()="Add Hydrophobic Coating"]]'
         ),
-        addedHydroPhobicCoating: this.page.locator(
-            '//button[contains(@class,"coatingPopup__button")]'
-        ),
+        buttonAdded: this.page.locator('//button[contains(@class,"coatingPopup__button")]'),
     };
 
     public async buttonPopUpOpenClick(): Promise<void> {
         await this.LOCATORS.buttonPopUpOpen.click();
     }
 
-    public async addHydroPhobicCoatingClick() {
-        await this.LOCATORS.addHydroPhobicCoating.click();
+    public async buttonAddHydroPhobicCoatingClick(): Promise<void> {
+        await this.LOCATORS.buttonAddHydroPhobicCoating.click();
     }
 
-    public async addedHydroPhobicCoatingClick() {
-        await this.LOCATORS.addedHydroPhobicCoating.click();
+    public async buttonAddedClick(): Promise<void> {
+        await this.LOCATORS.buttonAdded.click();
     }
 }

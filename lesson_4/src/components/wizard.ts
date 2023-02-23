@@ -1,5 +1,4 @@
 import { Component } from '@Core/component';
-import type { Locator } from '@playwright/test';
 
 export class Wizard extends Component {
     protected LOCATORS = {
@@ -11,19 +10,20 @@ export class Wizard extends Component {
         buttonHydrophobic: this.locator.locator('input[value="Super Hydrophobic"]'),
     };
 
-    public async buttonNonPrescriptionClick() {
+    public async buttonNonPrescriptionClick(): Promise<void> {
+        await this.LOCATORS.buttonNonPrescription.waitFor();
         await this.LOCATORS.buttonNonPrescription.click();
     }
 
-    public async buttonContinueClick() {
+    public async buttonContinueClick(): Promise<void> {
         await this.LOCATORS.buttonContinue.click();
     }
 
-    public async backToPrevClick() {
+    public async backToPrevClick(): Promise<void> {
         await this.LOCATORS.backToPrev.click();
     }
 
-    public async buttonHydrophobicClick() {
+    public async buttonHydrophobicClick(): Promise<void> {
         await this.LOCATORS.buttonHydrophobic.click();
     }
 }

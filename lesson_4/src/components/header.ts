@@ -10,9 +10,7 @@ export class Header extends Component {
     };
 
     public async buttonSunglassesClick(): Promise<void> {
-        await Promise.all([
-            await this.LOCATORS.buttonSunglasses.click(),
-            this.page.waitForLoadState('domcontentloaded'),
-        ]);
+        await this.LOCATORS.buttonSunglasses.click();
+        await this.page.waitForLoadState('domcontentloaded');
     }
 }

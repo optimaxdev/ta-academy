@@ -21,21 +21,20 @@ export default defineConfig({
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: 'https://ta-0000-gusa-desktop.gusadev.com/',
-
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'retain-on-failure',
         ignoreHTTPSErrors: true,
-        launchOptions: {
-            devtools: true,
-            args: ['--start-maximized'],
-        },
     },
     projects: [
         {
             name: 'chromium',
             use: {
-                ...devices['Desktop Chrome'],
+                ...devices['Desktop chromium'],
                 viewport: { height: 1080, width: 1920 },
+                launchOptions: {
+                    devtools: false,
+                    args: ['--start-fullscreen'],
+                },
             },
         },
     ],
