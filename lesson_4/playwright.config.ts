@@ -21,7 +21,7 @@ export default defineConfig({
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: 'https://ta-0000-gusa-desktop.gusadev.com/',
-
+        headless: false,
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'retain-on-failure',
         ignoreHTTPSErrors: true,
