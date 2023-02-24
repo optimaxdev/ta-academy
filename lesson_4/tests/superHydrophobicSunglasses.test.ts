@@ -36,6 +36,7 @@ test.describe('PDPInteraction events', () => {
         continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
         await continueButton.click();
     });
+
     test('should fire after adding coating and removing it', async ({ page }) => {
         const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
 
