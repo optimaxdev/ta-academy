@@ -1,55 +1,29 @@
-import { expect, test } from '@playwright/test';
-import { DataLayer } from '@Utils/dataLayer';
+import { expect, test } from '@Test';
 import { forEachSeries } from 'p-iteration';
 
 test.describe('catch Magazines events', () => {
-  test('catch Magazines events', async ({ page }) => {
-    const dataLayer = new DataLayer(page);
+  const expectedEvent = {
+    event: 'HPInteraction',
+    eventAction: 'Magazines',
+    eventCategory: 'HP - D',
+  };
 
-    await page.goto('/');
-    await page.waitForURL('https://ta-0000-gusa-desktop.gusadev.com/', { waitUntil: 'domcontentloaded' });
-    await page.locator('.homeAsFeaturedIn__wrapper___1hf1F').scrollIntoViewIfNeeded();
+  test.beforeEach(async ({ homePage }) => {
+    await homePage.open();
+    await homePage.FeatureIn.scrollTo();
+  });
 
-    await test.step('check event Magazines Visible', async () => {
-      const expectedEvent = {
-        event: 'HPInteraction',
-        eventAction: 'Magazines',
-        eventCategory: 'HP - D',
-        eventLabel: 'Visible',
-      };
+  test('check quantity and catch Magazines events', async ({ homePage, dataLayer }) => {
+    const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
+    await verifyEvent('Visible');
 
-      const [event] = await dataLayer.waitForDataLayer({
-        event: 'HPInteraction',
-        eventAction: 'Magazines',
-        eventLabel: 'Visible',
-      });
+    const magazines = await homePage.FeatureIn.getMagazines();
+    expect(magazines.length).toBe(7);
 
-      expect(event).toStrictEqual(expectedEvent);
-    });
-    await test.step('', async () => {
-      const expectedEvent = {
-        event: "HPInteraction", 
-        eventAction: "Magazines",
-        eventCategory: "HP - D",
-        eventLabel: "Click",
-      };
-  
-      const magazines = await page.locator('.homeAsFeaturedIn__listItem___2cWZJ').all();
-      const qty = magazines.length;
-      expect(qty).toBe(7);
-  
-      await forEachSeries(magazines, async(item) => {
-        await page.evaluate(() => (window.dataLayer = []));
-        await item.click();
-  
-        const [event] = await dataLayer.waitForDataLayer({
-          event: 'HPInteraction',
-          eventAction: 'Magazines',
-          eventLabel: "Click",
-        });
-  
-        expect(event).toStrictEqual(expectedEvent);
-      });
+    await forEachSeries(magazines, async (magazine) => {
+      await dataLayer.clearDataLayer();
+      await magazine.click();
+      await verifyEvent('Click');
     });
   });
 });

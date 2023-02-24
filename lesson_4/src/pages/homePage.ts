@@ -3,6 +3,9 @@ import { Footer } from '@Components/footer';
 import { FeaturedIn } from '@Components/featuredIn';
 
 export class HomePage extends Container {
+    static open() {
+      throw new Error('Method not implemented.');
+    }
     protected LOCATORS = {
         footer: this.page.locator('//footer'),
         featured: this.page.locator('//section[contains(., "As featured in.")]'),
