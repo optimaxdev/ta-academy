@@ -1,6 +1,6 @@
 import { test } from '@Test';
 
-test.describe.only('PDPInteraction events', () => {
+test.describe('PDPInteraction events', () => {
     const expectedEvent = {
         event: 'PDPInteraction',
         eventAction: 'Sun Lens Funnel - Step 4: Coating',
