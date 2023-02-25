@@ -30,7 +30,7 @@ test.describe('check sunglasses event', async () => {
       '//div[@role="button" and contains(., "Non-prescription")]'
     );
     await usageGlassesbutton?.click();
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(10000);
 
     const continueBtn = await page.$(
       '//button[contains(., "Continue")]'
