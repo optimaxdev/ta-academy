@@ -1,12 +1,9 @@
 import { Component } from '@Core/component';
 
 export class Header extends Component {
-    protected LOCATOR = {
-        header: this.locator,
-    };
-
     protected LOCATORS = {
-        buttonSunglasses: this.page.locator('//nav//a[contains(., "Sunglasses")]'),
+        buttonSunglasses: this.locator.locator('//a[contains(., "Sunglasses")]'),
+        header: this.locator,
     };
 
     public async buttonSunglassesClick(): Promise<void> {

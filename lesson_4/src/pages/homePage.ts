@@ -10,7 +10,7 @@ export class HomePage extends Container {
         featured: this.page.locator('//section[contains(., "As featured in.")]'),
     };
 
-    public Header = new Header(this.LOCATORS.featured, this.page);
+    public Header = new Header(this.LOCATORS.header, this.page);
     public FeatureIn = new FeaturedIn(this.LOCATORS.featured, this.page);
     public Footer = new Footer(this.LOCATORS.footer, this.page);
 

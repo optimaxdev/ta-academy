@@ -17,10 +17,6 @@ export class ProductPage extends Container {
 
     public async buttonSelecetLensesClick(): Promise<void> {
         await this.LOCATORS.buttonRevies.waitFor();
-        // Необходимо дождатся загрузки страницы, чтобы нажать на кнопку выбора линз,
-        // пока не отобразились оценки пользователей, нажатия на кнопку ничего не делают.
-        // domcontentloaded - не помогает, networkidle - помогает, но работает не стабильно
-        // Поэтому пришлось приваязаться к оценкам
         await this.LOCATORS.buttonSelectLenses.click();
         await this.page.waitForLoadState('domcontentloaded');
     }

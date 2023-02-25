@@ -38,7 +38,7 @@ test.describe.only('PDPInteraction events', () => {
 
     test('test PopUp: visible, add and remove', async ({ dataLayer, productPage }) => {
         const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
-        await productPage.PopUpCoating.buttonPopUpOpenClick();
+        await productPage.Wizard.buttonPopUpOpenClick();
         await verifyEvent('Learn More - Super Hydrophobic');
 
         await productPage.PopUpCoating.buttonAddHydroPhobicCoatingClick();
@@ -46,7 +46,7 @@ test.describe.only('PDPInteraction events', () => {
         await verifyEvent('Super Hydrophobic - Add - PopUp');
 
         await productPage.Wizard.backToPrevClick();
-        await productPage.PopUpCoating.buttonPopUpOpenClick();
+        await productPage.Wizard.buttonPopUpOpenClick();
         await productPage.PopUpCoating.buttonAddedClick();
         await productPage.Wizard.buttonContinueClick();
         await verifyEvent('Super Hydrophobic - Remove - PopUp');
