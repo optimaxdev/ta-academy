@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
-import { waitFor } from '@Utils/waitFor';
 
 test.describe.configure({ mode: 'serial' });
 
@@ -55,10 +54,10 @@ test.describe('check sunglasses event', async () => {
       eventAction: 'Sun Lens Funnel - Step 4: Coating',
       eventLabel: 'No Coating Added',
     };
-    const continueBtn3 = await page.$(
+    const continueBtn = await page.$(
       '//button[contains(., "Continue")]'
     );
-    await continueBtn3?.click();
+    await continueBtn?.click();
     await page.waitForTimeout(10000);
     const [event] = await dataLayer.waitForDataLayer({
       event: 'PDPInteraction',
@@ -106,11 +105,11 @@ test.describe('check sunglasses event', async () => {
       'input[value="Super Hydrophobic"]'
     );
     await hydrophobicBtn?.click();
-    await page.waitForTimeout(10000);
-    const continueBtn3 = await page.$(
+    await page.waitForTimeout(5000);
+    const continueBtn = await page.$(
       '//button[contains(., "Continue")]'
     );
-    await continueBtn3?.click();
+    await continueBtn?.click();
 
     const backButton = await page.$$(
       '//button[contains(., "Back")]'
@@ -139,6 +138,93 @@ test.describe('check sunglasses event', async () => {
       event: 'PDPInteraction',
       eventAction: 'Sun Lens Funnel - Step 4: Coating',
       eventLabel: 'Super Hydrophobic - Remove',
+    });
+    expect(event).toStrictEqual(expectedHydraAddEvent);
+  });
+
+  test('catch event "Super Hydrophobic - Add - PopUp"', async ({
+    page,
+  }) => {
+    const dataLayer = new DataLayer(page);
+    const openPopupBtn = await page.$(
+      '//div[@role="presentation"]//span[@data-test-name="questionMark"]'
+    );
+    await openPopupBtn?.click();
+    await page.waitForTimeout(5000);
+
+    const addHydrophobicBtn = await page.$(
+      '//button[contains(., "Add Hydrophobic Coating")]'
+    );
+    await addHydrophobicBtn?.click();
+    await page.waitForTimeout(5000);
+
+    const continueBtn = await page.$(
+      '//button[contains(., "Continue")]'
+    );
+    await continueBtn?.click();
+    await page.waitForTimeout(10000);
+
+    const expectedHydraAddEvent = {
+      event: 'PDPInteraction',
+      eventCategory: 'PDP - D',
+      eventAction: 'Sun Lens Funnel - Step 4: Coating',
+      eventLabel: 'Super Hydrophobic - Add - PopUp',
+    };
+    const [event] = await dataLayer.waitForDataLayer({
+      event: 'PDPInteraction',
+      eventLabel: 'Super Hydrophobic - Add - PopUp',
+    });
+    expect(event).toStrictEqual(expectedHydraAddEvent);
+  });
+
+  test('catch event "Super Hydrophobic - Remove - PopUp"', async ({
+    page,
+  }) => {
+    const dataLayer = new DataLayer(page);
+
+    const hydrophobicBtn = await page.$(
+      'input[value="Super Hydrophobic"]'
+    );
+    await hydrophobicBtn?.click();
+    await page.waitForTimeout(5000);
+    const continueBtn = await page.$(
+      '//button[contains(., "Continue")]'
+    );
+    await continueBtn?.click();
+
+    const backButton = await page.$$(
+      '//button[contains(., "Back")]'
+    );
+    await backButton[1]?.click();
+    await page.waitForTimeout(5000);
+
+    const openPopupBtn = await page.$(
+      '//div[@role="presentation"]//span[@data-test-name="questionMark"]'
+    );
+    await openPopupBtn?.click();
+    await page.waitForTimeout(5000);
+
+    const addedHydrophobicBtn = await page.$(
+      '//button[contains(., "Added")]'
+    );
+    await addedHydrophobicBtn?.click();
+    await page.waitForTimeout(5000);
+
+    const continueBtn2 = await page.$(
+      '//button[contains(., "Continue")]'
+    );
+    await continueBtn2?.click();
+    await page.waitForTimeout(5000);
+
+    const expectedHydraAddEvent = {
+      event: 'PDPInteraction',
+      eventCategory: 'PDP - D',
+      eventAction: 'Sun Lens Funnel - Step 4: Coating',
+      eventLabel: 'Super Hydrophobic - Remove - PopUp',
+    };
+    const [event] = await dataLayer.waitForDataLayer({
+      event: 'PDPInteraction',
+      eventLabel: 'Super Hydrophobic - Remove - PopUp',
     });
     expect(event).toStrictEqual(expectedHydraAddEvent);
   });
