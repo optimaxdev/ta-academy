@@ -2,11 +2,15 @@ import { test as base, expect } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
 import { HomePage } from '@Pages/homePage';
 import { CategoryPage } from '@Pages/categoryPage';
+import { ProductGlassesPage } from '@Pages/productGlassesPage';
+import { ChooseLensesPage } from '@Pages/chooseLensesPage';
 
 type Options = {
     dataLayer: DataLayer;
     homePage: HomePage;
     categoryPage: CategoryPage;
+    productGlassesPage: ProductGlassesPage;
+    chooseLensesPage: ChooseLensesPage;
 };
 
 const test = base.extend<Options>({
@@ -18,6 +22,12 @@ const test = base.extend<Options>({
     },
     categoryPage: async ({ page }, use) => {
         await use(new CategoryPage(page));
+    },
+    productGlassesPage: async ({ page }, use) => {
+        await use(new ProductGlassesPage(page));
+    },
+    chooseLensesPage: async ({ page }, use) => {
+        await use(new ChooseLensesPage(page));
     },
 });
 
