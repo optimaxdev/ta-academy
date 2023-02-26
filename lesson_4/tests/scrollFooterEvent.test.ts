@@ -1,27 +1,22 @@
-import { expect, test } from '@playwright/test';
-import { DataLayer } from '@Utils/dataLayer';
+import { expect, test } from '@Test';
 
-test.use({ viewport: { height: 1080, width: 1920 } });
+test.describe('check event in dataLayer', () => {
+    const expectedEvent = {
+        event: 'GeneralNonInteraction',
+        eventAction: '20% Visible',
+        eventCategory: 'Footer - D',
+        eventLabel: '',
+    };
 
-test('check event in dataLayer 20% visibility', async ({
-  page,
-}) => {
-  const dataLayer = new DataLayer(page);
+    test('check event in dataLayer 20% visibility', async ({ homePage, dataLayer }) => {
+        await homePage.open();
+        await homePage.Footer.scrollTo();
 
-  const expectedEvent = {
-    event: 'GeneralNonInteraction',
-    eventAction: '20% Visible',
-    eventCategory: 'Footer - D',
-    eventLabel: '',
-  };
+        const [event] = await dataLayer.waitForDataLayer({
+            event: 'GeneralNonInteraction',
+            eventAction: '20% Visible',
+        });
 
-  await page.goto('/');
-  await page.waitForTimeout(5000);
-
-  await page.mouse.wheel(0, 10000);
-  const [event] = await dataLayer.waitForDataLayer({
-    event: 'GeneralNonInteraction',
-    eventAction: '20% Visible',
-  });
-  expect(event).toStrictEqual(expectedEvent);
+        expect(event).toStrictEqual(expectedEvent);
+    });
 });
