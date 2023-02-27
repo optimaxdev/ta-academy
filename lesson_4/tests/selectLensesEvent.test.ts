@@ -10,7 +10,7 @@ test.describe('check sunglasses event', async () => {
     };
     test.beforeEach(async ({ homePage, categoryPage, productPage }) => {
         await homePage.goto();
-        await homePage.WizardContainer.gotoSunglasses();
+        await homePage.Sunglasses.buttonSunglassesClick();
         await categoryPage.getProducts();
         await categoryPage.getFirstProduct();
         await productPage.selectLensesClick();
