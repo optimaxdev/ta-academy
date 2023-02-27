@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ESNext",
+        "lib": ["ESNext", "dom"],
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+            "@Utils/*": ["src/utils/*"],
+            "@Core/*": ["src/core/*"],
+            "@Test": ["src/customTest"],
+            "@Components/*": ["src/components/*"],
+            "@Pages/*": ["src/pages/*"]
+        },
+        "strict": true
+    },
+    "include": ["src", "tests", ".eslintrc.js", "playwright.config.ts", "typescript"],
+    "exclude": ["node_modules"]
+}
