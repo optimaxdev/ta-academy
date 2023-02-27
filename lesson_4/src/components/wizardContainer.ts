@@ -7,12 +7,12 @@ export class WizardContainer extends Component {
         ),
         continueBtn: this.locator.locator('//button[contains(., "Continue")]'),
         backBtn: this.locator.locator('//button[text() = "Back"]'),
-        hydraphobicBtn: this.locator.locator('input[value="Super Hydrophobic"]'),
+        hydrophobicBtn: this.locator.locator('input[value="Super Hydrophobic"]'),
         openPopupBtn: this.locator.locator(
             '//div[@role="presentation"]//span[@data-test-name="questionMark"]'
         ),
-        addHydrophobicBtn: this.locator.locator('//button[contains(., "Add Hydrophobic Coating")]'),
-        addedHydrophobicBtn: this.locator.locator('//button[contains(., "Added")]'),
+        addHydrophobicBtn: this.page.locator('//span[text() = "Add Hydrophobic Coating"]'),
+        addedHydrophobicBtn: this.page.locator('//span[text() = "Added"]'),
     };
 
     public async selectOptionClick(): Promise<void> {
@@ -27,8 +27,8 @@ export class WizardContainer extends Component {
         await this.LOCATORS.backBtn.click();
     }
 
-    public async hydraphobicBtnClick(): Promise<void> {
-        await this.LOCATORS.hydraphobicBtn.click();
+    public async hydrophobicBtnClick(): Promise<void> {
+        await this.LOCATORS.hydrophobicBtn.click();
     }
 
     public async openPopupBtnClick(): Promise<void> {

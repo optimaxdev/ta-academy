@@ -2,11 +2,11 @@ import { Component } from '@Core/component';
 
 export class Sunglasses extends Component {
     protected LOCATORS = {
-        sunglassessBtn: this.locator.locator('//nav//a[contains(., "Sunglasses")]'),
+        sunglassess: this.locator,
     };
 
     public async buttonSunglassesClick(): Promise<void> {
-        await this.LOCATORS.sunglassessBtn.click();
+        await this.LOCATORS.sunglassess.click();
         await this.page.waitForLoadState('domcontentloaded');
     }
 }

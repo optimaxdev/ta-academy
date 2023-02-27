@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from '@Test';
 
 test.describe.configure({ mode: 'serial' });
 
@@ -9,9 +9,9 @@ test.describe('check sunglasses event', async () => {
         eventCategory: 'PDP - D',
     };
     test.beforeEach(async ({ homePage, categoryPage, productPage }) => {
-        await homePage.goto();
+        await homePage.open();
         await homePage.Sunglasses.buttonSunglassesClick();
-        await categoryPage.getProducts();
+        // await categoryPage.getProducts();
         await categoryPage.getFirstProduct();
         await productPage.selectLensesClick();
         await productPage.WizardContainer.selectOptionClick();
@@ -27,13 +27,13 @@ test.describe('check sunglasses event', async () => {
         await verifyEvent('No Coating Added');
 
         await productPage.WizardContainer.backButtonClick();
-        await productPage.WizardContainer.hydraphobicBtnClick();
+        await productPage.WizardContainer.hydrophobicBtnClick();
         await productPage.WizardContainer.continueButtonClick();
 
         await verifyEvent('Super Hydrophobic - Add');
 
         await productPage.WizardContainer.backButtonClick();
-        await productPage.WizardContainer.hydraphobicBtnClick();
+        await productPage.WizardContainer.hydrophobicBtnClick();
         await productPage.WizardContainer.continueButtonClick();
 
         await verifyEvent('Super Hydrophobic - Remove');
@@ -47,7 +47,7 @@ test.describe('check sunglasses event', async () => {
 
         await productPage.WizardContainer.backButtonClick();
         await productPage.WizardContainer.openPopupBtnClick();
-        await productPage.WizardContainer.addedHydrophobicBtnClick();
+        await productPage.WizardContainer.removeHydrophobicBtnClick();
         await productPage.WizardContainer.continueButtonClick();
 
         await verifyEvent('Super Hydrophobic - Remove - PopUp');

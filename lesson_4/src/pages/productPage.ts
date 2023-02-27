@@ -12,6 +12,6 @@ export class ProductPage extends Container {
     public WizardContainer = new WizardContainer(this.LOCATORS.wizardContainer, this.page);
 
     public async selectLensesClick(): Promise<void> {
-        await this.LOCATORS.selectLensesBtn.click(), this.page.waitForLoadState('domcontentloaded');
+        await this.LOCATORS.selectLensesBtn.click(), await this.page.waitForTimeout(5000);
     }
 }
