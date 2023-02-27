@@ -7,8 +7,7 @@ export class GlassesCard extends Component {
     };
 
     public async openFirstProduct(): Promise<void> {
-        const allProduct = await this.LOCATOR.product.all();
-        const firstProduct = allProduct[0];
-        return firstProduct.click();
+        const allProduct = this.LOCATOR.product.first();
+        return await allProduct.click();
     }
 }
