@@ -10,7 +10,9 @@ export class CategoryPage extends Container {
             waitUntil: 'domcontentloaded',
         });
     }
-    public async getProducts(): Promise<Locator[]> {
-        return await this.LOCATORS.product.all();
+    public async getFirstProduct(): Promise<void> {
+        let arrayProd = await this.LOCATORS.product.all();
+        await arrayProd[0].click();
+        await this.page.waitForTimeout(10000);
     }
 }
