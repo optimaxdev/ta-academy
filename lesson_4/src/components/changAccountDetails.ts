@@ -2,10 +2,10 @@ import { Component } from '@Core/component';
 
 export class ChangAccountDetails extends Component {
     protected LOCATORS = {
-        firstNameInput: this.page.locator('//input[@placeholder="First Name"]'),
-        lastNameInput: this.page.locator('//input[@placeholder="Last Name"]'),
-        saveButton: this.page.locator('//button[contains(., "Save")]'),
-        closeButton: this.page.locator('//button[contains(., "Close")]'),
+        firstNameInput: this.locator.locator('//input[@placeholder="First Name"]'),
+        lastNameInput: this.locator.locator('//input[@placeholder="Last Name"]'),
+        saveButton: this.locator.locator('//button[contains(., "Save")]'),
+        closeButton: this.locator.locator('//button[contains(., "Close")]'),
     };
 
     public async fill(): Promise<void> {
