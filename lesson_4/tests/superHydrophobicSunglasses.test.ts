@@ -5,6 +5,7 @@ import { ProductPage } from '@Pages/productPage';
 import { test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
 
+
 test.describe('PDPInteraction events', () => {
     let homePage: HomePage;
     let dataLayer: DataLayer;
@@ -28,8 +29,6 @@ test.describe('PDPInteraction events', () => {
 
         categoryPage = new CategoryPage(page);
         categoryPage.openFirstProduct();
-
-        //await page.waitForTimeout(5000);
 
         productPage = new ProductPage(page);
         const sidebar = productPage.SidebarBox;

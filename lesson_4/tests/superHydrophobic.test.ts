@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
-import { forEachSeries } from 'p-iteration';
 
 test.describe('PDPInteraction event', () => {
     let dataLayer: DataLayer;
