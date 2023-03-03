@@ -1,5 +1,3 @@
-import { AccountDetails } from '@Components/accountDetails';
-import { Header } from '@Components/header';
 import { expect, test } from '@Test';
 import faker from 'faker';
 
