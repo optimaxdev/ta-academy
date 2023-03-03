@@ -1,10 +1,8 @@
 import { Container } from '@Core/container';
 import { Footer } from '@Components/footer';
 import { FeaturedIn } from '@Components/featuredIn';
-<<<<<<< HEAD
 import { Header } from '@Components/header';
 import { RegisterPopupForm } from '@Components/registerPopupForm';
-=======
 import { Sunglasses } from '@Components/sunglasses';
 
 export class HomePage extends Container {
