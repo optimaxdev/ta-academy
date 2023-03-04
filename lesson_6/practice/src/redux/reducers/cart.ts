@@ -1,6 +1,6 @@
 import { CartStateT, CartItemT, Constants } from '../types/cart';
 import { ActionT } from '../actions/cart';
-import { pushToDataLayer } from 'dataLayer/dataLayer';
+import { pushToDataLayer } from '../../dataLayer/dataLayer';
 
 const initialState = {
   isLoading: true,
@@ -12,13 +12,13 @@ const initialState = {
 const getFromItem = (
   items: CartItemT[],
   id: number,
-  field: keyof CartItemT
-) => {
+  format: (item: CartItemT) => string
+): string => {
   const item = items.find((item) => item.id === id);
   if (!item) {
-    return '';
+    throw new Error('Failed to find item');
   }
-  return item[field];
+  return format(item);
 };
 
 export const cartReducer = (
@@ -62,6 +62,10 @@ export const cartReducer = (
         name: 'AddItem',
         value: action.payload.name,
       });
+      pushToDataLayer({
+        name: 'FormInteraction',
+        value: 'Close',
+      });
       return {
         ...state,
         items: [
@@ -74,29 +78,31 @@ export const cartReducer = (
         openAddForm: false,
       };
     case Constants.INCREMENT_QUANTITY:
-      pushToDataLayer({
-        name: 'DecrementQuantity',
-        value: getFromItem(state.items, action.payload, 'name'),
-      });
       return {
         ...state,
         items: state.items.map((item) => {
           if (item.id === action.payload) {
             item.quantity = item.quantity + 1;
+            pushToDataLayer({
+              name: 'IncrementQuantity',
+              value: `${item.name} - Increased: ${item.quantity}`,
+            });
           }
           return item;
         }),
       };
     case Constants.DECREMENT_QUANTITY:
-      pushToDataLayer({
-        name: 'IncrementQuantity',
-        value: getFromItem(state.items, action.payload, 'name'),
-      });
       return {
         ...state,
         items: state.items.map((item) => {
           if (item.id === action.payload) {
-            if (item.quantity > 1) item.quantity = item.quantity - 1;
+            if (item.quantity > 1) {
+              item.quantity = item.quantity - 1;
+              pushToDataLayer({
+                name: 'DecrementQuantity',
+                value: `${item.name} - Decreased: ${item.quantity}`,
+              });
+            }
           }
           return item;
         }),
@@ -104,7 +110,7 @@ export const cartReducer = (
     case Constants.DELETE_ITEM:
       pushToDataLayer({
         name: 'DeleteItem',
-        value: getFromItem(state.items, action.payload, 'name'),
+        value: getFromItem(state.items, action.payload, (i) => i.name),
       });
       return {
         ...state,
