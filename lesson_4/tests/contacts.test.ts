@@ -1,27 +1,13 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '@Test';
 
 test.describe('check amount of product on page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    const contactsButton = await page.$(
-      '//nav//a[contains(., "Contacts")]'
-    );
+    test('quantity of product should be 36', async ({ categoryPage, baseURL, page }) => {
+        await categoryPage.open('contact-lenses');
 
-    await contactsButton?.click();
-  });
-  test('quantity of product should be 36', async ({
-    page,
-    baseURL,
-  }) => {
-    const url = page.url();
-    expect(url).toBe(`${baseURL}contact-lenses`);
+        const url = page.url();
+        expect(url).toBe(`${baseURL}contact-lenses`);
 
-    await page.waitForTimeout(10000);
-
-    const products = await page.$$(
-      '[data-test-name="product"]'
-    );
-    const qty = products.length;
-    expect(qty).toBe(36);
-  });
+        const products = await categoryPage.getProducts();
+        expect(products.length).toBe(36);
+    });
 });
