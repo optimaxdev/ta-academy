@@ -3,8 +3,6 @@ import { DataLayer } from '@Utils/dataLayer';
 import { HomePage } from '@Pages/homePage';
 import { CategoryPage } from '@Pages/categoryPage';
 import { ProfilePage } from '@Pages/ProfilePage';
-// import { ProductPage } from '@Pages/productPage';
-
 type Options = {
     dataLayer: DataLayer;
     homePage: HomePage;
