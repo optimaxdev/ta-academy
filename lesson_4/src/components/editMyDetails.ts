@@ -6,7 +6,7 @@ export class EditMyDetails extends Component {
         button: (name: string) => this.locator.locator(`//button[contains(., "${name}")]`),
     };
 
-    public async editUserDetails(nameInput: string, newUserDetails:string): Promise<void>  {
+    public async editUserDetails(nameInput: string, newUserDetails: string): Promise<void>  {
         await this.LOCATOR.InputUserDetail(`${nameInput}`).fill(`${newUserDetails}`);
     }
    
