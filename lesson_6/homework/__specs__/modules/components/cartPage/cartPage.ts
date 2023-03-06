@@ -9,7 +9,6 @@ const SELECTORS = {
 };
 
 export class CartPageContainer extends Container {
-    document: any;
     public async fulfill(initialState = {}): Promise<void> {
         await super.fulfill(initialState);
     }
