@@ -10,4 +10,9 @@ export class CartList extends Component {
         const cartItems = await this.element.waitForXpath(SELECTORS.cartItem);
         return cartItems.map(item => new CartItem(item));
     }
+
+    public async getCartItemsLength(): Promise<number> {
+        const cartItems = await this.element.waitForXpath(SELECTORS.cartItem);
+        return cartItems.length;
+    }
 }
