@@ -4,6 +4,9 @@
 */
 
 type Person = {
+  name: string;
+  age: number | 'unknown';
+  isSuperHero?: boolean;
   occupation?: string;
 };
 

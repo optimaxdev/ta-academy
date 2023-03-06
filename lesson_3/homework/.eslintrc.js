@@ -10,6 +10,12 @@ module.exports = {
     project: ['./tsconfig.json'],
   },
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
