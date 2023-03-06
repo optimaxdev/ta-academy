@@ -82,4 +82,5 @@ module.exports = {
     },
     ignorePatterns: ['fileMock.ts', 'jest.config.js', '.eslintrc.js', 'babel.config.js'],
     root: true,
+    project: "lesson_06/tsconfig.json"
 };
