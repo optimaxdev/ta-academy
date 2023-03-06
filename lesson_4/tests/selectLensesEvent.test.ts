@@ -11,7 +11,6 @@ test.describe('check sunglasses event', async () => {
     test.beforeEach(async ({ homePage, categoryPage, productPage }) => {
         await homePage.open();
         await homePage.Sunglasses.buttonSunglassesClick();
-        // await categoryPage.getProducts();
         await categoryPage.getFirstProduct();
         await productPage.selectLensesClick();
         await productPage.WizardContainer.selectOptionClick();
