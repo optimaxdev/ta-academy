@@ -9,16 +9,37 @@ test.describe('create new account', () => {
         password: 'Password123',
     };
 
-    test('create new account via tooltip', async ({ homePage }) => {
+    test('create new account via tooltip and validation of registration data', async ({ homePage, accountPage }) => {
         await homePage.open();
         const header = homePage.Header;
+
         await header.clickAccountTooltip();
         await header.clickCreateAccount();
 
         const registerForm = homePage.RegisterForm;
+
         await registerForm.fill({ email });
         await registerForm.fill(accountData);
 
         expect(await header.getUserName()).toBe(accountData.firstName);
+        
+        await header.clickRegisteredAccountTooltip();
+        await header.clickMyAccount();
+
+        const myDetails = accountPage.MyDetails;
+
+        expect(await accountPage.Profile.getProfileName()).toBe(accountData.firstName);
+        expect(await myDetails.getFirstName()).toBe(accountData.firstName);
+        expect(await myDetails.getLastName()).toBe(accountData.lastName);
+        expect(await myDetails.getEmail()).toBe(email);
+        
+        await myDetails.clickEditInformation();
+        await myDetails.changeFirstName('Denis');
+        await myDetails.changeLastName('Fomin');
+        await myDetails.clickSaveChangedInfo();
+        await myDetails.clickCloseEdit();
+        
+        expect(await myDetails.getFirstName()).toBe('Denis');
+        expect(await myDetails.getLastName()).toBe('Fomin');
     });
 });

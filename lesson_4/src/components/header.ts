@@ -3,7 +3,9 @@ import { Component } from '@Core/component';
 export class Header extends Component {
     protected LOCATORS = {
         accountTooltip: this.locator.locator('//button[contains(., "My Account")]'),
+        registeredAccountTooltip: this.locator.locator('//button[contains(., "Welcome")]'),
         createAccount: this.locator.locator('a', { hasText: 'Create Account' }),
+        myAccount: this.locator.locator('a', { hasText: 'My Account' }),
         welcome: this.locator.locator('//button[contains(., "Welcome,")]'),
     };
 
@@ -11,8 +13,16 @@ export class Header extends Component {
         await this.LOCATORS.accountTooltip.click();
     }
 
+    public async clickRegisteredAccountTooltip(): Promise<void> {
+        await this.LOCATORS.registeredAccountTooltip.click();
+    }
+
     public async clickCreateAccount(): Promise<void> {
         await this.LOCATORS.createAccount.click();
+    }
+
+    public async clickMyAccount(): Promise<void> {
+        await this.LOCATORS.myAccount.click();
     }
 
     public async getUserName(): Promise<string | undefined> {
