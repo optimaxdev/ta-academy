@@ -1,7 +1,7 @@
 import { expect, test } from '@Test';
 import faker from 'faker';
 
-test.describe('create new account', async () => {
+test.describe('create new account', () => {
     const email = faker.internet.email();
     const accountData = {
         firstName: faker.name.firstName(),
