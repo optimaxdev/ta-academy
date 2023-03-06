@@ -3,10 +3,10 @@
 */
 
 type Animal = {
-  moving: any;
+  moving: string;
   voice?: string;
-  info: any;
-  say: () => string | any;
+  info: () => string;
+  say: () => string | void;
 };
 
 class Cat implements Animal {
@@ -42,7 +42,29 @@ class Fish implements Animal {
     return `This animal: moving in the ${this.moving}.`;
   }
   say(): void {
-    return;
+    console.log(
+      "I want to tell you something, but I'm just a fish"
+    );
   }
 }
-const animal = new Cat('land', 'miau').info();
+
+const cat = new Cat('land', 'miau');
+const bird = new Bird();
+const fish = new Fish();
+
+// cat
+const informationAboutCat: string = cat.info();
+console.log(informationAboutCat);
+const whatTheCatSay: string = cat.say();
+console.log(whatTheCatSay);
+
+// bird
+const informationAboutBird: string = bird.info();
+console.log(informationAboutBird);
+const whatTheBirdSay: string = bird.say();
+console.log(whatTheBirdSay);
+
+// fish
+const informationAboutFish: string = fish.info();
+console.log(informationAboutFish);
+fish.say();
