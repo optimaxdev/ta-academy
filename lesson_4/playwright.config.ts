@@ -26,8 +26,8 @@ export default defineConfig({
         trace: 'retain-on-failure',
         ignoreHTTPSErrors: true,
         launchOptions: {
-            devtools: false,
-            args: ['--start-fullscreen'],
+            devtools: true,
+            args: ['--start-maximized'],
         },
     },
     projects: [
