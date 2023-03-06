@@ -13,4 +13,9 @@ export class CategoryPage extends Container {
     public async getProducts(): Promise<Locator[]> {
         return await this.LOCATORS.product.all();
     }
+
+    public async openFirstProduct(): Promise<[void,void]> {
+        const product = await this.page.waitForSelector('[data-test-name="product"]');    
+        return await Promise.all([product.click(), this.page.waitForLoadState('domcontentloaded')]);
+    }
 }
