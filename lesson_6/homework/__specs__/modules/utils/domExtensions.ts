@@ -16,6 +16,7 @@ type CustomDomApi = {
     hoverByXpath: (selector: string) => Promise<void>;
     waitForQuerySelector: (selector: string) => Promise<Element[]>;
     waitForXpath: (selector: string, options?: { timeout: number }) => Promise<Element[]>;
+    fillByXpath: (selector: string, value: string) => Promise<void>;
 };
 
 declare global {
@@ -105,6 +106,15 @@ async function hoverByXpath(this: Element | Document, selector: string): Promise
     }
 }
 
+async function fillByXpath(this: Element | Document, selector: string, value: string): Promise<void> {
+    try {
+        const [element] = await this.waitForXpath(selector);
+        fireEvent.change(element, { target: { value } });
+    } catch (e) {
+        throw new Error(`Cannot fill by xpath \n${(e as Error).stack}`);
+    }
+}
+
 const extensions = {
     $$x,
     $x,
@@ -117,6 +127,7 @@ const extensions = {
     waitForQuerySelector,
     waitForXpath,
     getByText,
+    fillByXpath,
 };
 
 [Element, Document].forEach(({ prototype }) => (prototype = Object.assign(prototype, extensions)));
