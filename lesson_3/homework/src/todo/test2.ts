@@ -1,12 +1,8 @@
-/*
-    Remove all `any` type
-*/
-
 type Animal = {
-  moving: any;
+  moving: string;
   voice?: string;
-  info: any;
-  say: () => string | any;
+  info: () => string;
+  say: () => string | void;
 };
 
 class Cat implements Animal {
@@ -45,4 +41,14 @@ class Fish implements Animal {
     return;
   }
 }
-const animal = new Cat('land', 'miau').info();
+
+const animals: Animal[] = [
+  new Cat('land', 'miau'),
+  new Bird(),
+  new Fish(),
+];
+
+animals.forEach(function (animal) {
+  console.log(animal.info());
+  console.log(animal.say());
+});

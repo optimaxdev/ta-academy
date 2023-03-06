@@ -1,10 +1,8 @@
-/*
- - Remove all `any` type
- - Fix type `person`
-*/
-
 type Person = {
-  occupation?: string;
+  occupation: string;
+  name: string;
+  age: number | string;
+  isSuperHero?: boolean;
 };
 
 const users: Person[] = [
