@@ -10,6 +10,7 @@ type CustomDomApi = {
     $x: (xpath: string) => Element;
     clickByCSS: (selector: string) => Promise<void>;
     clickByXpath: (selector: string) => Promise<void>;
+    fillByXpath: (selector: string, value: string | number) => Promise<void>;
     debug: () => void;
     getByText: (text: string) => Element;
     hoverByCSS: (selector: string) => Promise<void>;
@@ -83,6 +84,15 @@ async function clickByXpath(this: Element | Document, selector: string): Promise
     }
 }
 
+async function fillByXpath(this: Element | Document, selector: string, value: string | number): Promise<void> {
+    try {
+        const [element] = await this.waitForXpath(selector);
+        fireEvent.change(element, { target: { value } });
+    } catch (e) {
+        throw new Error(`Cannot click by xpath \n${(e as Error).stack}`);
+    }
+}
+
 async function hoverByCSS(this: Element | Document, selector: string): Promise<void> {
     try {
         const [element] = await this.waitForQuerySelector(selector);
@@ -117,6 +127,7 @@ const extensions = {
     waitForQuerySelector,
     waitForXpath,
     getByText,
+    fillByXpath,
 };
 
 [Element, Document].forEach(({ prototype }) => (prototype = Object.assign(prototype, extensions)));
