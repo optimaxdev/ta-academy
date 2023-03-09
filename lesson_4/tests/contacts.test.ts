@@ -16,9 +16,7 @@ test.describe('check amount of product on page', () => {
     const url = page.url();
     expect(url).toBe(`${baseURL}contact-lenses`);
 
-    await page.waitForURL(`${baseURL}contact-lenses`, {
-      waitUntil: 'domcontentloaded',
-    });
+    await page.waitForTimeout(10000);
 
     const products = await page.$$(
       '[data-test-name="product"]'
