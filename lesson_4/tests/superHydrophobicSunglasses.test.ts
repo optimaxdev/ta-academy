@@ -23,8 +23,9 @@ test.describe('PDPInteraction events', () => {
     ]);
 
     const product = await page.waitForSelector(
-      '[data-test-name="product"]'
+      "//ul[contains(@class, 'categoryRows')]//a[1]"
     );
+    await page.waitForTimeout(5000);
     await Promise.all([
       product.click(),
       page.waitForLoadState('domcontentloaded'),

@@ -16,9 +16,12 @@ test('check event in dataLayer 20% visibility', async ({
   };
 
   await page.goto('/');
-  await page.waitForTimeout(5000);
+  await page.waitForLoadState('domcontentloaded');
 
-  await page.mouse.wheel(0, 10000);
+  await page
+    .getByRole('contentinfo')
+    .scrollIntoViewIfNeeded();
+  // await page.mouse.wheel(0, 10000);
   const [event] = await dataLayer.waitForDataLayer({
     event: 'GeneralNonInteraction',
     eventAction: '20% Visible',

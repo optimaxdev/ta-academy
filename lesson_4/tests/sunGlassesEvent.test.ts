@@ -5,14 +5,10 @@ test.use({ viewport: { height: 1080, width: 1920 } });
 
 test.describe('sunglasses event', () => {
   test.beforeEach(async ({ page, baseURL }) => {
-    await page.goto('/');
-
-    await page.waitForURL(`${baseURL}`, {
-      waitUntil: 'domcontentloaded',
-    });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
   });
 
-  test('check', async ({ page }) => {
+  test('check for event', async ({ page }) => {
     const dataLayer = new DataLayer(page);
 
     const expectedEvent = {
@@ -22,20 +18,17 @@ test.describe('sunglasses event', () => {
       eventLabel: 'No Coating Added',
     };
 
-    // await page.goto(
-    //   'https://ta-0000-gusa-desktop.gusadev.com/'
-    // );
     await page
-      .locator('#page-header')
-      .getByRole('link', {
-        name: 'Sunglasses',
-        exact: true,
-      })
+      .locator("//nav//a[contains(@href, '/sunglasses')]")
       .click();
+
+    await page.waitForLoadState('domcontentloaded');
+
     const glassesLinksList = await page.$$(
       "//ul[contains(@class, 'categoryRows__list')]//a"
     );
     await glassesLinksList[0]?.click();
+    await page.waitForLoadState('domcontentloaded');
 
     await page
       .getByRole('button', { name: 'choose lenses' })

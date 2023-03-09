@@ -69,11 +69,9 @@ test.describe('magazines', () => {
       await page.evaluate(() => (window.dataLayer = []));
       await magazine.click();
 
-      const [event] = await dataLayer.waitForDataLayer({
-        event: 'HPInteraction',
-        eventAction: 'Magazines',
-        eventLabel: 'Click',
-      });
+      const [event] = await dataLayer.waitForDataLayer(
+        expectedEvent
+      );
 
       expect(event).toStrictEqual(expectedEvent);
     }
