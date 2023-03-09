@@ -1,6 +1,8 @@
 {
   "eslint.workingDirectories": [
     "lesson_6/practice",
+    "lesson_6/practice/__specs__",
+    "lesson_4/",
     "lesson_2/practice",
     "lesson_3/homework"
   ],
