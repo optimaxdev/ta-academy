@@ -1,8 +1,17 @@
+import { Wizzard } from '@Components/wizzard';
+import { CategoryPage } from '@Pages/categoryPage';
+import { HomePage } from '@Pages/homePage';
+import { ProductPage } from '@Pages/productPage';
 import { test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
 
+
 test.describe('PDPInteraction events', () => {
+    let homePage: HomePage;
     let dataLayer: DataLayer;
+    let categoryPage: CategoryPage;
+    let productPage: ProductPage;
+    let wizzardBox: Wizzard;
     const expectedEvent = {
         event: 'PDPInteraction',
         eventAction: 'Sun Lens Funnel - Step 4: Coating',
@@ -11,59 +20,51 @@ test.describe('PDPInteraction events', () => {
 
     test.beforeEach(async ({ page }) => {
         dataLayer = new DataLayer(page);
+        
+        homePage = new HomePage(page);
 
-        await page.goto('/');
+        await homePage.open();
+        const header = await homePage.Header;
+        await header.clickSunglassesButton();
 
-        const sunglassesButton = await page.waitForSelector('//nav//a[contains(., "Sunglasses")]');
-        await Promise.all([sunglassesButton.click(), page.waitForLoadState('domcontentloaded')]);
+        categoryPage = new CategoryPage(page);
+        categoryPage.openFirstProduct();
 
-        const product = await page.waitForSelector('[data-test-name="product"]');
-        await Promise.all([product.click(), page.waitForLoadState('domcontentloaded')]);
-
-        await page.waitForTimeout(5000);
-        const chooseLenses = await page.waitForSelector('//button[@aria-label="choose lenses"]');
-        await chooseLenses.click();
-
-        const nonPrescription = await page.waitForSelector(
-            '//div[@role="button" and contains(., "Non-prescription")]'
-        );
-        await nonPrescription.click();
-
-        let continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
-
+        productPage = new ProductPage(page);
+        const sidebar = productPage.SidebarBox;
+        await sidebar.clickChooseLenses();
+        wizzardBox = productPage.WizzardBox;
+        
+        wizzardBox.clickNonPrescription();
+        wizzardBox.clickContinue();
         await page.waitForTimeout(2000);
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        wizzardBox.clickContinue();
     });
+
+    test.afterAll(async ({ page }) => {
+        await page.close();
+    })
+
     test('should fire after adding coating and removing it', async ({ page }) => {
         const verifyEvent = dataLayer.createEventVerifier(expectedEvent);
 
-        let continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        wizzardBox = productPage.WizzardBox;
+        await page.waitForTimeout(1000);
+        wizzardBox.clickContinue();
 
         await verifyEvent('No Coating Added');
 
-        let backToPrev = await page.waitForSelector('//button[text() = "Back"]');
-        await backToPrev.click();
-
-        let hydrophobicButton = await page.waitForSelector('input[value="Super Hydrophobic"]');
-        await hydrophobicButton.click();
-
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await wizzardBox.clickBackToPrev();
+        await wizzardBox.clickSuperHydrophobic();
+        await wizzardBox.clickContinue();
 
         await verifyEvent('Super Hydrophobic - Add');
 
-        backToPrev = await page.waitForSelector('//button[text() = "Back"]');
-        await backToPrev.click();
-
-        hydrophobicButton = await page.waitForSelector('input[value="Super Hydrophobic"]');
-        await hydrophobicButton.click();
-
-        continueButton = await page.waitForSelector('//button[contains(., "Continue")]');
-        await continueButton.click();
+        await wizzardBox.clickBackToPrev();
+        await wizzardBox.clickSuperHydrophobic();
+        await wizzardBox.clickContinue();
 
         await verifyEvent('Super Hydrophobic - Remove');
     });
+
 });

@@ -16,6 +16,7 @@ type CustomDomApi = {
     hoverByXpath: (selector: string) => Promise<void>;
     waitForQuerySelector: (selector: string) => Promise<Element[]>;
     waitForXpath: (selector: string, options?: { timeout: number }) => Promise<Element[]>;
+    fillFieldByXpath: (selector: string, data: string) => Promise<void>;
 };
 
 declare global {
@@ -74,6 +75,15 @@ async function clickByCSS(this: Element | Document, selector: string): Promise<v
     }
 }
 
+async function fillFieldByXpath(this: Element | Document, selector: string, data: string): Promise<void> {
+    try {
+        const [element] = await this.waitForXpath(selector);
+        fireEvent.change(element, {target: {value: data}});
+    } catch (e) {
+        throw new Error(`Cannot change by css \n${(e as Error).stack}`);
+    }
+}
+
 async function clickByXpath(this: Element | Document, selector: string): Promise<void> {
     try {
         const [element] = await this.waitForXpath(selector);
@@ -117,6 +127,7 @@ const extensions = {
     waitForQuerySelector,
     waitForXpath,
     getByText,
+    fillFieldByXpath,
 };
 
 [Element, Document].forEach(({ prototype }) => (prototype = Object.assign(prototype, extensions)));
