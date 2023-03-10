@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('check amount of product on page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    const contactsButton = await page.$(
+    const contactsButton = page.locator(
       '//nav//a[contains(., "Contacts")]'
     );
 
@@ -17,9 +17,10 @@ test.describe('check amount of product on page', () => {
     const url = page.url();
     expect(url).toBe(`${baseURL}contact-lenses`);
 
-    const products = await page.$$(
-      '[data-test-name="product"]'
-    );
+    const products = await page
+      .locator('[data-test-name="product"]')
+      .all();
+
     const qty = products.length;
     expect(qty).toBe(36);
   });
