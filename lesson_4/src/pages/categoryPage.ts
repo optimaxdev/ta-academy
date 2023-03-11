@@ -13,4 +13,9 @@ export class CategoryPage extends Container {
     public async getProducts(): Promise<Locator[]> {
         return await this.LOCATORS.product.all();
     }
+    public async clickFirstProduct() {
+        let productsArray = await this.LOCATORS.product.all()
+        await productsArray[0].click()
+        await this.page.waitForLoadState("domcontentloaded");
+    }
 }
