@@ -1,15 +1,17 @@
+/* eslint-disable prettier/prettier */
 /*
     Remove all `any` type
 */
 
 type Animal = {
-  moving: any;
+  moving: string;
   voice?: string;
-  info: any;
-  say: () => string | any;
+  info: () => string;
+  say: () => string | void;
 };
 
 class Cat implements Animal {
+  // eslint-disable-next-line prettier/prettier
   constructor(
     public moving: string,
     public voice: string

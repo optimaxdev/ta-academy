@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Container } from '@Core/container';
 import { Footer } from '@Components/footer';
 import { FeaturedIn } from '@Components/featuredIn';

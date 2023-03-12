@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*
  - Remove all `any` type
  - Fix type `person`
@@ -5,6 +6,9 @@
 
 type Person = {
   occupation?: string;
+  name: string;
+  age: number | string;
+  isSuperHero?: boolean;
 };
 
 const users: Person[] = [
