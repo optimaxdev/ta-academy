@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Container } from '@Core/container';
 import type { Locator } from '@playwright/test';
 

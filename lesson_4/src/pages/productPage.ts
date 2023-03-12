@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Container } from '@Core/container';
 import { Wizard } from '@Components/wizard';
 

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { test } from '@playwright/test';
 
 test.describe('PDPInteraction events', () => {

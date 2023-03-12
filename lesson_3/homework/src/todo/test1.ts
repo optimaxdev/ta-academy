@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /*
  - Remove all `any` type
  - Fix type `person`

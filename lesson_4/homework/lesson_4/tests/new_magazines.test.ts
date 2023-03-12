@@ -1,8 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { expect, test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
 import { forEachSeries } from 'p-iteration';
-
-test.use({ viewport: { height: 1080, width: 1920 } });
 
 test('scroll to the block "As featured in." and catch event', async ({ page }) => {
     const dataLayer = new DataLayer(page);

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -23,18 +24,18 @@ export default defineConfig({
         baseURL: 'https://ta-0000-gusa-desktop.gusadev.com/',
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'retain-on-failure',
+        trace: 'on',
         ignoreHTTPSErrors: true,
-        launchOptions: {
-            devtools: true,
-            args: ['--start-maximized'],
-        },
+        // launchOptions: {
+        //     devtools: true,
+        //     args: ['--start-maximized'],
+        // },
     },
     projects: [
         {
             name: 'chromium',
             use: {
-                ...devices['Desktop Chrome'],
+                ...devices['Desktop chromium'],
                 viewport: { height: 1080, width: 1920 },
             },
         },
