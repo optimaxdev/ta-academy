@@ -3,10 +3,10 @@
 */
 
 type Animal = {
-  moving: any;
+  moving: string;
   voice?: string;
-  info: any;
-  say: () => string | any;
+  info: object;
+  say: () => string | void;
 };
 
 class Cat implements Animal {
