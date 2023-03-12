@@ -1,10 +1,11 @@
 import { CartList } from '@Components/cartPage/cartList/cartList';
 import { Container } from '@Core/container';
-import { AddItemButton } from '@Components/cartPage/addItemButton/addItemButton';
+import { PopupForm } from '@Components/cartPage/popupForm/popupForm';
 
 const SELECTORS = {
     cartList: './/div[@class="cart__list"]',
     addItemButton: ".//button[text()='Add Cart Item']",
+    popupForm: './/div[@data-testid="modal"]',
 };
 
 export class CartPageContainer extends Container {
@@ -19,5 +20,10 @@ export class CartPageContainer extends Container {
 
     public async addCartItem(): Promise<void> {
         await document.clickByXpath(SELECTORS.addItemButton);
+    }
+
+    public async getPopupForm(): Promise<PopupForm> {
+        let [popup] = await document.waitForXpath(SELECTORS.popupForm);
+        return new PopupForm(popup);
     }
 }
