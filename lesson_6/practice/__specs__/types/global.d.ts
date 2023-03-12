@@ -16,7 +16,9 @@ declare const reporter: {
 };
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-interface Window {}
+interface Window {
+    dataLayer: any[];
+}
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface StoreJsStorage {

@@ -13,7 +13,7 @@ export class GetCartItemsMock extends MockObject {
         return [
             {
                 id: 1,
-                name: 'Some weird name',
+                name: 'Item One',
                 price: 30,
                 quantity: 4,
             },

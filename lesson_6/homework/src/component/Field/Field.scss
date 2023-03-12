@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &_error {
+    .input {
+      border: 1px solid $critic;
+    }
+  }
+}
+
+.error {
+  text-align: right;
+  color: $critic;
+}
+
+.input {
+  padding: 5px;
+}
