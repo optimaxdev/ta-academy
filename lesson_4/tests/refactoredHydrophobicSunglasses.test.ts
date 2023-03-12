@@ -1,4 +1,5 @@
-import { test } from '@playwright/test';
+/* eslint-disable prettier/prettier */
+import { expect, test } from '@Test';
 
 test.describe('PDPInteraction events', () => {
     const expectedEvent = {
@@ -9,7 +10,7 @@ test.describe('PDPInteraction events', () => {
 
     test.beforeEach(async ({ homePage, productPage, categoryPage }) => {
         await homePage.open();
-        await homePage.Header.sunglassesClick();
+        await homePage.CardSunglasses.buttonSunglassesClick();
         await categoryPage.chooseProduct();
         await productPage.selecetLensesClick();
         await productPage.Wizard.prescriptionClick();

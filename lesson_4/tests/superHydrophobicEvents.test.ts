@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { expect, test } from '@playwright/test';
 import { DataLayer } from '@Utils/dataLayer';
 
