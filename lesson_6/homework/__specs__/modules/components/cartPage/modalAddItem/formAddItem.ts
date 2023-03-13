@@ -4,11 +4,11 @@ import { fireEvent } from '@testing-library/react';
 const SELECTORS = {
     inputItem: (name: 'input-name' | 'input-price' | 'input-quantity') => `.//input[@data-testid="${name}"]`,
     buttonCreat:'.//button[contains(., "Создать")]',
-    buttonCloseForm:'.//button[contains(., "✕")]',
+    buttonCloseForm:'.//button[text()="✕"]',
 };
 
 export class FormAddItem extends Component {
-
+    
     public async fillForm(): Promise<void> {
        const [inputName] =  await this.element.waitForXpath(SELECTORS.inputItem('input-name'));
        fireEvent.change(inputName, {target:{value:'demo-item'}});

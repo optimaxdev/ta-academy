@@ -35,8 +35,8 @@ describe('check modal window - add cart item ', () => {
         reporter.endStep();
 
         window.dataLayer = [];
-
         await cartPage.clickButtonAddCart();
+
         reporter.startStep('Check event Open');
         const eventOpenFormTwo = window.dataLayer.find(event => event.name === 'FormInteraction');
         expect(eventOpenFormTwo).toMatchObject({
@@ -46,11 +46,12 @@ describe('check modal window - add cart item ', () => {
         reporter.endStep();
 
         window.dataLayer = [];
+        const modal = await cartPage.getModalAddCart();
 
         reporter.startStep('Check event Close');
-        await modalAddCart.clickButtonCloseForm();
-        const closeModaltwo = await window.dataLayer.find(e => e.name === 'FormInteraction');
-        expect(closeModaltwo).toMatchObject({
+        await modal.clickButtonCloseForm();
+        const closeModalTwo = await window.dataLayer.find(e => e.name === 'FormInteraction');
+        expect(closeModalTwo).toMatchObject({
             name: 'FormInteraction',
             value: 'Close',
         });
