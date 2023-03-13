@@ -13,4 +13,10 @@ export class CategoryPage extends Container {
     public async getProducts(): Promise<Locator[]> {
         return await this.LOCATORS.product.all();
     }
+    public async chooseProduct(): Promise<void> {
+        const allProducts = await this.LOCATORS.product.all();
+        await allProducts[0].click();
+
+        await this.page.waitForLoadState('domcontentloaded');
+    }
 }

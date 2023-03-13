@@ -1,0 +1,22 @@
+{
+  "name": "ta-academy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@playwright/test": "^1.31.2"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatalyaKras/ta-academy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NatalyaKras/ta-academy/issues"
+  },
+  "homepage": "https://github.com/NatalyaKras/ta-academy#readme"
+}

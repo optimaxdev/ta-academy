@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { WaitForOptions } from '@Utils/waitFor';
 import { waitFor } from '@Utils/waitFor';
 import type { DataLayerEvent } from '@Utils/types/dataLayerEvent';

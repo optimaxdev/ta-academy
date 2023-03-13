@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { expect, test } from '@Test';
 
 test.describe('check event in dataLayer', () => {

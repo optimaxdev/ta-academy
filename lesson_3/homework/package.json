@@ -6,7 +6,8 @@
   "scripts": {
     "start": "yarn ts-node src/index.ts",
     "tslint": "tsc --noEmit",
-    "eslint": "eslint ./"
+    "eslint": "eslint ./",
+    "test": "scripts/test"
   },
   "dependencies": {
     "eslint-config-prettier": "^8.5.0",
